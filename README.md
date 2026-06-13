@@ -160,8 +160,6 @@ An interactive Streamlit dashboard was developed to visualize project insights a
 
 ## Project Structure
 
-## Project Structure
-
 ```text
 delivery-eta-intelligence/
 │
