@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Large datasets not stored in GitHub
+data/raw/*
+data/processed/delivery_data_clean.csv
+data/processed/delivery_data_features.csv
+
+# Local VS Code settings
+.vscode/
+
+# Temporary project files
+*.docx
