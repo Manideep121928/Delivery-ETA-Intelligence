@@ -1,217 +1,321 @@
 # 🚚 Delivery ETA Intelligence Dashboard
-Delivery ETA Intelligence Dashboard – Machine Learning and Network Analytics for Logistics Optimization.
-## Project Overview
 
-Delivery ETA Intelligence Dashboard is a Machine Learning and Network Analytics project designed to predict shipment delivery times, identify logistics bottlenecks, and analyze transportation network performance.
+## Overview
 
-The project combines predictive modeling, business intelligence, graph analytics, and interactive dashboarding to provide actionable insights into logistics operations.
+Delivery ETA Intelligence Dashboard is an end-to-end logistics analytics and machine learning platform designed to improve delivery time prediction, identify network bottlenecks, analyze transportation strategies, and leverage graph-based intelligence for logistics optimization.
+
+The project combines:
+
+* Machine Learning for ETA prediction
+* Network Science for logistics graph analysis
+* Business Analytics for operational decision-making
+* Graph Embeddings (Node2Vec) for graph-enhanced ETA prediction
+* Interactive Streamlit Dashboard for visualization and monitoring
+
+---
 
 ## Problem Statement
 
-Logistics companies often struggle with inaccurate delivery time estimation and limited visibility into network bottlenecks. Delayed shipments can lead to customer dissatisfaction, increased operational costs, and inefficient resource allocation.
+Logistics operations often face:
 
-This project aims to:
+* Inaccurate ETA predictions
+* Bottleneck hubs causing network congestion
+* Delayed corridors impacting SLA compliance
+* Inefficient transportation mode selection
+* Limited visibility into network-wide performance
 
-* Predict delivery ETA using Machine Learning
-* Identify critical hubs in the logistics network
-* Detect bottleneck corridors causing delays
-* Provide data-driven insights through an interactive dashboard
+This project addresses these challenges using predictive analytics and graph intelligence.
 
+---
 
 ## Dataset
 
-The dataset contains shipment movement information including:
+The dataset contains shipment-level information including:
 
 * Source Hub
 * Destination Hub
-* Route Type
-* Travel Distance
-* Travel Time
-* Segment Information
+* Actual Delivery Time
 * OSRM Estimated Time
-* Shipment Status Information
+* Distance Information
+* Corridor Information
+* Transportation Type (FTL / Carting)
+* Operational Timestamps
 
-### Logistics Network Statistics
+After feature engineering, the dataset contains:
 
-| Metric                  | Value |
-| ----------------------- | ----- |
-| Total Hubs (Nodes)      | 1657  |
-| Total Corridors (Edges) | 2783  |
+* Hub-level features
+* Corridor-level features
+* Historical delay metrics
+* Transportation features
+* Graph embedding features
 
+---
 
-## Feature Engineering
-
-Several domain-specific features were created to improve ETA prediction performance.
-
-## Key Features
-
-* Historical Delay Ratio
-* Corridor Delay Statistics
-* Hub Shipment Volume
-* Average Trip Speed
-* Segment Distance
-* Segment OSRM Time
-* Route Characteristics
-
-Feature engineering significantly improved predictive capability.
-
-## Machine Learning Models
-
-Multiple regression models were evaluated for ETA prediction.
-
-## Models Tested
-
-1. Linear Regression
-2. Random Forest Regressor
-3. XGBoost Regressor
-
-## Final Selected Model
-
-**XGBoost Regressor**
-
-## Performance Metrics
-
-| Metric   | Value  |
-| -------- | ------ |
-| MAE      | 10.60  |
-| RMSE     | 24.13  |
-| R² Score | 0.7184 |
-
-The final trained model is stored in:
+# Project Architecture
 
 ```text
-models/final_eta_model.pkl
+Raw Logistics Data
+        │
+        ▼
+Data Cleaning & Quality Checks
+        │
+        ▼
+Feature Engineering
+        │
+        ▼
+Network Graph Construction
+        │
+        ▼
+Network Analytics & Bottleneck Detection
+        │
+        ├────────────► FTL vs Carting Framework
+        │
+        ├────────────► ETA Prediction Models
+        │
+        └────────────► Node2Vec Graph Embeddings
+                                │
+                                ▼
+                    Graph-Enhanced ETA Prediction
+                                │
+                                ▼
+                     Streamlit Intelligence Dashboard
 ```
 
+---
 
-## Network Analytics
-
-The logistics network was modeled as a graph using NetworkX.
-
-### Analytics Performed
-
-* Degree Centrality Analysis
-* Betweenness Centrality Analysis
-* Bottleneck Corridor Detection
-* Delay Hotspot Identification
-* Network Summary Generation
-
-These analyses help identify critical hubs and network vulnerabilities.
-
-
-## Dashboard
-
-An interactive Streamlit dashboard was developed to visualize project insights and model performance.
-
-### Dashboard Sections
-
-### 📈 Overview
-
-* Total Hubs
-* Total Corridors
-* Best Model
-* R² Score
-
-### 🏢 Hub Analytics
-
-* Top Source Hubs
-* Top Destination Hubs
-
-### ⚠️ Bottleneck Analytics
-
-* Top Bottleneck Corridors
-* Average Delay Analysis
-
-### 🌐 Network Analytics
-
-* Degree Centrality
-* Betweenness Centrality
-
-### 📊 Network Summary
-
-* Network Statistics
-* Node and Edge Summary
-
-### 🤖 Model Performance
-
-* Model Comparison
-* XGBoost Performance Metrics
-
-## Results
-
-## Best ETA Prediction Model
-
-**XGBoost Regressor**
-
-| Metric   | Value  |
-| -------- | ------ |
-| MAE      | 10.60  |
-| RMSE     | 24.13  |
-| R² Score | 0.7184 |
-
-## Key Network Insights
-
-* Analyzed 1,657 logistics hubs
-* Evaluated 2,783 transportation corridors
-* Identified critical hubs using graph centrality measures
-* Detected bottleneck corridors and delay hotspots
-* Generated network intelligence reports for operational decision-making
-
-## Project Structure
+# Project Structure
 
 ```text
 delivery-eta-intelligence/
-│
-├── dashboard/
-│   └── app.py
-│
+
 ├── data/
 │   ├── raw/
 │   └── processed/
+│       ├── delivery_data_clean.csv
+│       ├── delivery_data_features.csv
+│       └── delivery_data_node2vec.csv
 │
 ├── models/
 │   ├── final_eta_model.pkl
 │   └── label_encoders.pkl
 │
-```text
 ├── notebooks/
 │   ├── 01_eda_and_quality_checks.ipynb
-│   ├── 02_eda_feature_engineering.ipynb │
+│   ├── 02_eda_feature_engineering.ipynb
 │   ├── 03_model_building.ipynb
-
 │   ├── 04_model_selection_and_final_model.ipynb
 │   ├── 05_network_analytics_and_dashboard_prep.ipynb
 │   ├── 06_network_graph_analytics.ipynb
-│   └── 07_ftl_vs_carting_decision_framework.ipynb
-│              FTL vs Carting recommendation framework
-```
-
+│   ├── 07_ftl_vs_carting_decision_framework.ipynb
+│   ├── 08_graph_enhanced_eta_model.ipynb
+│   └── 09_node2vec_graph_enhanced_eta.ipynb
 │
 ├── reports/
+│   ├── bottleneck_corridors.csv
+│   ├── degree_centrality_hubs.csv
+│   ├── betweenness_centrality_hubs.csv
+│   ├── delay_hotspots.csv
+│   ├── hub_delay_hotspots.csv
+│   ├── model_comparison.csv
+│   ├── network_summary.csv
+│   ├── top_source_hubs.csv
+│   ├── top_destination_hubs.csv
+│   ├── ftl_vs_carting_summary.csv
+│   └── ftl_carting_decision_framework.csv
+│
+├── dashboard/
+│   └── app.py
 │
 ├── README.md
 └── requirements.txt
 ```
-## How to Run
 
-## Install Dependencies
+---
 
-```bash
-pip install -r requirements.txt
+# Feature Engineering
+
+Key engineered features include:
+
+* Corridor Volume
+* Source Hub Volume
+* Destination Hub Volume
+* Historical Corridor Delay
+* Historical Delay Ratio
+* Trip Segments
+* Trip Total Distance
+* Average Trip Speed
+* Weekend Indicator
+* Route Type
+* Corridor-Level Aggregations
+
+---
+
+# Network Analytics
+
+A directed logistics graph was constructed where:
+
+* Nodes represent logistics hubs
+* Edges represent shipment corridors
+* Edge weights represent corridor traffic and delays
+
+### Network Statistics
+
+| Metric          | Value |
+| --------------- | ----- |
+| Total Hubs      | 1657  |
+| Total Corridors | 2783  |
+
+### Network Analysis Performed
+
+* Degree Centrality
+* Betweenness Centrality
+* Bottleneck Detection
+* Delay Hotspot Analysis
+* Hub Ranking
+
+---
+
+# Bottleneck Analytics
+
+The system identifies:
+
+* High-risk hubs
+* Critical network chokepoints
+* Delay-prone corridors
+* High SLA-risk regions
+
+Outputs:
+
+* Top Bottleneck Corridors
+* Delay Hotspots
+* High Betweenness Hubs
+
+---
+
+# ETA Prediction Models
+
+Models evaluated:
+
+* Linear Regression
+* Random Forest
+* XGBoost
+
+Evaluation Metrics:
+
+* MAE
+* RMSE
+* R² Score
+
+Best traditional model:
+
+**XGBoost**
+
+---
+
+# Graph-Enhanced ETA Prediction
+
+To capture network structure information, Node2Vec embeddings were generated using the logistics graph.
+
+### Graph Configuration
+
+* Nodes: 1657
+* Corridors: 2783
+* Embedding Dimensions: 32
+* Source Embeddings: 32 Features
+* Destination Embeddings: 32 Features
+
+Total Graph Features Added:
+
+```text
+64 Node2Vec Embedding Features
 ```
 
-## Launch Dashboard
+---
 
-```bash
-streamlit run dashboard/app.py
-```
+## Baseline vs Graph-Enhanced Benchmark
 
-The dashboard will be available at:
-http://localhost:8501
+| Metric              | Baseline XGBoost | Node2Vec + XGBoost |
+| ------------------- | ---------------: | -----------------: |
+| MAE                 |            5.399 |              5.177 |
+| RMSE                |           21.858 |             21.272 |
+| R²                  |         0.998669 |           0.998739 |
+| Within 15% Accuracy |          99.535% |            99.610% |
 
+### Result
 
+The Node2Vec-enhanced model achieved measurable improvements across all evaluation metrics, demonstrating that logistics network topology provides useful information for ETA prediction.
 
-## Technologies Used
+---
+
+# FTL vs Carting Decision Framework
+
+A transportation strategy framework was developed to compare:
+
+### Carting
+
+* Local distribution
+* Urban deliveries
+* Last-mile operations
+
+### FTL (Full Truck Load)
+
+* Long-haul transport
+* High-volume corridors
+* Inter-city logistics
+
+### Recommended Rules
+
+| Condition            | Recommended Mode |
+| -------------------- | ---------------- |
+| Distance < 50 km     | Carting          |
+| Distance > 150 km    | FTL              |
+| High Volume Corridor | FTL              |
+| Urban Distribution   | Carting          |
+| Last Mile Delivery   | Carting          |
+
+---
+
+# Streamlit Dashboard
+
+The interactive dashboard provides:
+
+### Overview
+
+* Logistics Network Summary
+* Best Model Information
+
+### Hub Analytics
+
+* Top Source Hubs
+* Top Destination Hubs
+
+### Bottleneck Analytics
+
+* Bottleneck Corridors
+* Delay Analysis
+
+### Network Analytics
+
+* Degree Centrality
+* Betweenness Centrality
+
+### Model Performance
+
+* ETA Prediction Model Comparison
+
+### Graph Enhanced ETA
+
+* Baseline vs Node2Vec Benchmark
+* Graph Advantage Metrics
+
+### Transportation Strategy
+
+* FTL vs Carting Analysis
+* Decision Framework
+
+---
+
+# Technologies Used
 
 * Python
 * Pandas
@@ -219,65 +323,33 @@ http://localhost:8501
 * Scikit-Learn
 * XGBoost
 * NetworkX
+* Node2Vec
 * Streamlit
 * Matplotlib
 * Plotly
-* Joblib
 
+---
 
-## Future Improvements
+# Key Outcomes
 
-* Real-time ETA prediction
-* Route optimization recommendations
-* Automated bottleneck alerts
-* Interactive network graph visualization
-* Cloud deployment
+✅ Built a graph-aware logistics intelligence platform
 
-## Transportation Mode Decision Framework
+✅ Predicted delivery ETAs using machine learning
 
-A comparative analysis of FTL and Carting operations was performed using shipment distance, travel time, and delay characteristics.
-## Transportation Strategy Framework
+✅ Identified critical network bottlenecks
 
-A business decision-support framework was developed to compare Full Truck Load (FTL) and Carting operations using shipment-level logistics data.
+✅ Developed FTL vs Carting decision framework
 
-### Key Findings
+✅ Generated Node2Vec graph embeddings
 
-| Metric                | Carting | FTL    |
-| --------------------- | ------- | ------ |
-| Shipments             | 43,675  | 98,827 |
-| Avg Distance (km)     | 26.63   | 329.59 |
-| Avg Actual Time (min) | 70.37   | 576.34 |
-| Avg OSRM Time (min)   | 30.47   | 298.34 |
-| Avg Delay Ratio       | 2.45    | 2.00   |
+✅ Demonstrated measurable graph advantage in ETA prediction
 
-### Transportation Recommendations
+✅ Built an interactive Streamlit dashboard
 
-* Carting is recommended for local distribution and last-mile delivery operations.
-* FTL is recommended for long-haul and high-volume transportation corridors.
-* Distances below 50 km are best served using Carting.
-* Distances above 150 km are best served using FTL.
+---
 
+## Authors
 
-### Key Insights
+**Manideep, Sravya, Khushi**
 
-- FTL shipments averaged 329.6 km with a delay ratio of 2.00.
-- Carting shipments averaged 26.6 km with a delay ratio of 2.45.
-- FTL is recommended for long-haul and high-volume corridors.
-- Carting is recommended for urban and last-mile distribution.
-
-### Outputs
-
-- reports/ftl_vs_carting_summary.csv
-- reports/ftl_carting_decision_framework.csv
-### Business Impact
-
-The framework enables logistics planners to select the most suitable transportation mode based on corridor characteristics, distance, and operational efficiency, helping reduce transit delays and improve network utilization.
-## Team
-
-This project was developed collaboratively by:
-
-- Manideep
-- Sravya
-- Khushi
-
-as part of a logistics analytics and machine learning project focused on ETA prediction and network bottleneck detection.
+Logistics Intelligence • Machine Learning • Network Analytics • Graph-Based ETA Prediction
