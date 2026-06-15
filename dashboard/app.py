@@ -11,7 +11,8 @@ page = st.sidebar.radio(
         "Bottleneck Analytics",
         "Network Analytics",
         "Network Summary",
-        "Model Performance"
+        "Model Performance",
+        "Transportation Strategy"
     ]
 )
 st.title("🚚 Delivery ETA Intelligence Dashboard")
@@ -173,7 +174,66 @@ elif page == "Network Summary":
     )
 
     st.divider()
+elif page == "Transportation Strategy":
 
+    st.header("🚛 Transportation Strategy")
+
+    st.subheader("FTL vs Carting Performance Comparison")
+
+    route_summary = pd.read_csv(
+        "reports/ftl_vs_carting_summary.csv"
+    )
+    st.subheader("FTL vs Carting Performance Comparison")
+
+    route_summary = pd.read_csv(
+        "reports/ftl_vs_carting_summary.csv"
+    )
+
+    st.dataframe(
+        route_summary,
+        use_container_width=True
+    )
+    st.dataframe(
+        route_summary,
+        use_container_width=True
+    )
+
+    st.divider()
+
+    st.subheader("Transportation Mode Decision Framework")
+
+    decision_framework = pd.read_csv(
+        "reports/ftl_carting_decision_framework.csv"
+    )
+
+    st.dataframe(
+        decision_framework,
+        use_container_width=True
+    )
+
+    st.info(
+        """
+        Recommended Transportation Strategy:
+
+        • Carting → Local distribution and last-mile deliveries
+
+        • FTL → Long-haul and high-volume corridors
+
+        • Distance < 50 km → Prefer Carting
+
+        • Distance > 150 km → Prefer FTL
+        """
+    )
+    comparison_chart = route_summary.copy()
+
+    comparison_chart = comparison_chart.set_index("route_type")
+
+    st.subheader("Average Distance Comparison")
+
+    st.bar_chart(
+        comparison_chart["avg_distance"]
+    )
+    st.divider()
 
 elif page == "Model Performance":
 
