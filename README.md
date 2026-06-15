@@ -6,7 +6,6 @@ Delivery ETA Intelligence Dashboard is a Machine Learning and Network Analytics 
 
 The project combines predictive modeling, business intelligence, graph analytics, and interactive dashboarding to provide actionable insights into logistics operations.
 
-
 ## Problem Statement
 
 Logistics companies often struggle with inaccurate delivery time estimation and limited visibility into network bottlenecks. Delayed shipments can lead to customer dissatisfaction, increased operational costs, and inefficient resource allocation.
@@ -231,8 +230,29 @@ http://localhost:8501
 ## Transportation Mode Decision Framework
 
 A comparative analysis of FTL and Carting operations was performed using shipment distance, travel time, and delay characteristics.
+## Transportation Strategy Framework
+
+A business decision-support framework was developed to compare Full Truck Load (FTL) and Carting operations using shipment-level logistics data.
 
 ### Key Findings
+
+| Metric                | Carting | FTL    |
+| --------------------- | ------- | ------ |
+| Shipments             | 43,675  | 98,827 |
+| Avg Distance (km)     | 26.63   | 329.59 |
+| Avg Actual Time (min) | 70.37   | 576.34 |
+| Avg OSRM Time (min)   | 30.47   | 298.34 |
+| Avg Delay Ratio       | 2.45    | 2.00   |
+
+### Transportation Recommendations
+
+* Carting is recommended for local distribution and last-mile delivery operations.
+* FTL is recommended for long-haul and high-volume transportation corridors.
+* Distances below 50 km are best served using Carting.
+* Distances above 150 km are best served using FTL.
+
+
+### Key Insights
 
 - FTL shipments averaged 329.6 km with a delay ratio of 2.00.
 - Carting shipments averaged 26.6 km with a delay ratio of 2.45.
@@ -243,7 +263,9 @@ A comparative analysis of FTL and Carting operations was performed using shipmen
 
 - reports/ftl_vs_carting_summary.csv
 - reports/ftl_carting_decision_framework.csv
-  
+### Business Impact
+
+The framework enables logistics planners to select the most suitable transportation mode based on corridor characteristics, distance, and operational efficiency, helping reduce transit delays and improve network utilization.
 ## Team
 
 This project was developed collaboratively by:
